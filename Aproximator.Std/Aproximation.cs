@@ -2,7 +2,7 @@
 
 namespace Aproximator.Std
 {
-    public class Aproximation
+    public static class Aproximation
     {
         public static double Polynomial(double input, double[] rates)
         {
