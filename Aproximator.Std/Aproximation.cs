@@ -2,8 +2,17 @@
 
 namespace Aproximator.Std
 {
+    /// <summary>
+    /// Апроксимация данных
+    /// </summary>
     public static class Aproximation
     {
+        /// <summary>
+        /// Применение коэффициентов полинома
+        /// </summary>
+        /// <param name="input">Входное значение (сырые данные)</param>
+        /// <param name="rates">Коэффициенты полинома</param>
+        /// <returns>Результат применения коэффициентов</returns>
         public static double Polynomial(double input, double[] rates)
         {
             double Ti = 1, Ex = 0;
@@ -15,16 +24,22 @@ namespace Aproximator.Std
             return Ex;
         }
 
+        /// <summary>
+        /// Расчёт линейных коэффициентов
+        /// </summary>
+        /// <param name="x">Входные данные</param>
+        /// <param name="y">Эталонные значения</param>
+        /// <returns>Результат расчёта коэффициентов</returns>
         public static AproximationInfo Linear(double[] x, double[] y)
         {
             if (x == null || y == null) return null;
             if (x.Length != y.Length) return null;
             if (x.Length < 2) return null;
 
-            double XY = 0, Sum_X = 0,               //Суммы различных степеней
-                   Sum_Y = 0, Sum_X2 = 0, Sum_XY = 0, //
-                   Sigma = 0,                     //Сумма квадратов отклонений
-                   Tmp;                         //Отклонение
+            double XY = 0, Sum_X = 0,                   //Суммы различных степеней
+                   Sum_Y = 0, Sum_X2 = 0, Sum_XY = 0,   //
+                   Sigma = 0,                           //Сумма квадратов отклонений
+                   Tmp;                                 //Отклонение
 
             double[] A = new double[2];
             int N = x.Length;
@@ -44,13 +59,19 @@ namespace Aproximator.Std
             for (int i = 0; i < N; i++)
             {
                 Tmp = Math.Abs(y[i] - Polynomial(x[i], A)); //Отклонение
-                if (Err < Tmp) Err = Tmp;              //Макс. отклонение
-                Sigma += Tmp * Tmp;                       //Сумма квадратов отклонений
+                if (Err < Tmp) Err = Tmp;                   //Макс. отклонение
+                Sigma += Tmp * Tmp;                         //Сумма квадратов отклонений
             }
 
             return new AproximationInfo(A, Err, Math.Sqrt(Sigma / (N - 1)));
         }
 
+        /// <summary>
+        /// Расчёт коэффициентов квадратичного полинома
+        /// </summary>
+        /// <param name="x">Входные данные</param>
+        /// <param name="y">Эталонные значения</param>
+        /// <returns>Результат расчёта коэффициентов</returns>
         public static AproximationInfo Parabolic(double[] x, double[] y)
         {
             if (x == null || y == null) return null;
@@ -61,8 +82,8 @@ namespace Aproximator.Std
                    Sum_X = 0, Sum_X2 = 0, Sum_X3 = 0,
                    Sum_X4 = 0,
                    Sum_Y = 0, Sum_XY = 0, Sum_X2Y = 0,
-                   Sigma = 0,                     //Сумма квадратов отклонений
-                   Tmp;                         //Отклонение
+                   Sigma = 0,                       //Сумма квадратов отклонений
+                   Tmp;                             //Отклонение
 
             int N = x.Length;
             double[] A = new double[3];
@@ -89,13 +110,19 @@ namespace Aproximator.Std
             for (int i = 0; i < N; i++)
             {
                 Tmp = Math.Abs(y[i] - Polynomial(x[i], A)); //Отклонение
-                if (Err < Tmp) Err = Tmp;              //Макс. отклонение
-                Sigma += Tmp * Tmp;                       //Сумма квадратов отклонений
+                if (Err < Tmp) Err = Tmp;                   //Макс. отклонение
+                Sigma += Tmp * Tmp;                         //Сумма квадратов отклонений
             }
 
             return new AproximationInfo(A, Err, Math.Sqrt(Sigma / (N - 1)));
         }
 
+        /// <summary>
+        /// Расчёт коэффициентов кубического полинома
+        /// </summary>
+        /// <param name="x">Входные данные</param>
+        /// <param name="y">Эталонные значения</param>
+        /// <returns>Результат расчёта коэффициентов</returns>
         public static AproximationInfo Cube(double[] x, double[] y)
         {
             if (x == null || y == null) return null;
@@ -106,8 +133,8 @@ namespace Aproximator.Std
                    Sum_X = 0, Sum_X2 = 0, Sum_X3 = 0,
                    Sum_X4 = 0, Sum_X5 = 0, Sum_X6 = 0,
                    Sum_Y = 0, Sum_XY = 0, Sum_X2Y = 0, Sum_X3Y = 0,
-                   Sigma = 0,                     //Сумма квадратов отклонений
-                   Tmp;                         //Отклонение          //Отклонение
+                   Sigma = 0,                           //Сумма квадратов отклонений
+                   Tmp;                                 //Отклонение
 
             int N = x.Length;
             double[] A = new double[4];
@@ -142,8 +169,8 @@ namespace Aproximator.Std
             for (int i = 0; i < N; i++)
             {
                 Tmp = Math.Abs(y[i] - Polynomial(x[i], A)); //Отклонение
-                if (Err < Tmp) Err = Tmp;              //Макс. отклонение
-                Sigma += Tmp * Tmp;                       //Сумма квадратов отклонений
+                if (Err < Tmp) Err = Tmp;                   //Макс. отклонение
+                Sigma += Tmp * Tmp;                         //Сумма квадратов отклонений
             }
 
             return new AproximationInfo(A, Err, Math.Sqrt(Sigma / (N - 1)));
