@@ -2,10 +2,11 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Authors>Aproximator.Std</Authors>
-    <AssemblyVersion>0.8.0.0</AssemblyVersion>
+    <Authors>Gebenkov</Authors>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
     <FileVersion>0.0.0.0</FileVersion>
-    <Version>0.8.0</Version>
+    <Version>1.0.0</Version>
+    <Company>Interpribor</Company>
   </PropertyGroup>
 
 </Project>
